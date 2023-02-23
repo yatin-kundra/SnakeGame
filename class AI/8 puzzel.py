@@ -4,8 +4,7 @@ q = []
 visited = []
 h_list = []
 
-def mini():
-    global h_list
+def mini(h_list):
     mini = 10
     index = 0
     for i in range(len(h_list)):
@@ -88,20 +87,20 @@ def compare(s, r):
                 return 0
     return 1
 
-def search(s,r):
+def search(s, g):
     global q
     global visited
     global h_list
-    if compare(s,r):
+    if compare(s, g):
         print("found")
         visited.append(s)
         exit()
     while(1):
         initial = copy.deepcopy(s)
         u = up(initial)
-        h_list.append(distance(u,r))
+        h_list.append(distance(u, g))
         # display(initial)
-        if initial == r:
+        if initial == g:
             print("found")
             # print(len(visited))
             exit()
@@ -111,9 +110,9 @@ def search(s,r):
 
         initial = copy.deepcopy(s)
         d = down(initial)
-        h_list.append(distance(d, r))
+        h_list.append(distance(d, g))
         # display(initial)
-        if initial == r:
+        if initial == g:
             print("found")
             # print(len(visited))
             exit()
@@ -123,9 +122,9 @@ def search(s,r):
 
         initial = copy.deepcopy(s)
         l = left(initial)
-        h_list.append(distance(l, r))
+        h_list.append(distance(l, g))
         # display(initial)
-        if initial == r:
+        if initial == g:
             print("found")
             # print(len(visited))
             exit()
@@ -134,9 +133,9 @@ def search(s,r):
                 q.append(l)
         initial = copy.deepcopy(s)
         ri = right(initial)
-        h_list.append(distance(ri, r))
+        h_list.append(distance(ri, g))
         # display(initial)
-        if initial == r:
+        if initial == g:
             print("found")
             # print(len(visited))
             # print(initial)
@@ -148,6 +147,7 @@ def search(s,r):
         if len(q) > 0:
             s = q[0]
             del q[0]
+            print(s)
         else:
             print("goal state not possible.")
             exit()
@@ -168,6 +168,8 @@ def main():
     goal = [[2, 8, 1],
             [0, 4, 3],
             [7, 6, 5]]
+
+
 
     # initial = copy.deepcopy(start)  # this is used to compare to the initial setting
 
