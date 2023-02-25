@@ -2,37 +2,43 @@ import copy
 visited = []
 q_queue = []
 Heuristic_value = []
+a_star = []
+function_val = 1
 
 
-def min_index():
-    global Heuristic_value
+def min_index(l_list):
+    # global Heuristic_value
+    # global function_val
     mini = 10
     index = 0
-    for i in range(len(Heuristic_value)):
-        if mini > Heuristic_value[i]:
-            mini = Heuristic_value[i]
+    for i in range(len(l_list)):
+        if mini > l_list[i]:
+            mini = l_list[i]
             index = i
     return index
 
 
 def enqueue(node,g):
     global visited
-    global Heuristic_value
+    # global Heuristic_value
+    global function_val
     global q_queue
     if node not in visited and node not in q_queue:
         q_queue.append(node)
-        Heuristic_value.append(heuristic(node,g))
+        a_star.append(heuristic(node,g) + function_val)
 
 
 def dequeue():
     global q_queue
+    global function_val
     if len(q_queue) > 0:
         mini = 0
-        mini = min_index()
+        mini = min_index(a_star)
         s = q_queue[mini]
         visited.append(s)
         del q_queue[mini]
-        del Heuristic_value[mini]
+        del a_star[mini]
+        function_val +=1
         # print(s)
         return s
 

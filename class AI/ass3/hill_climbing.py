@@ -22,8 +22,9 @@ def enqueue(node):
         q_queue.append(node)
 
 
+
 def dequeue():
-    global q_queue
+    global q_queue, Heuristic_value
     if len(q_queue) > 0:
         mini = 0
         mini = min_index()
@@ -136,7 +137,8 @@ def search(s,g):
 
         else:
             enqueue(u)
-            Heuristic_value.append(heuristic(u, g))
+            if u in q_queue:
+                Heuristic_value.append(heuristic(u, g))
 
         initial = copy.deepcopy(s)
         d = down(initial)
@@ -151,7 +153,8 @@ def search(s,g):
 
         else:
             enqueue(d)
-            Heuristic_value.append(heuristic(d, g))
+            if d in q_queue:
+                Heuristic_value.append(heuristic(d, g))
 
         initial = copy.deepcopy(s)
         l = left(initial)
@@ -165,7 +168,8 @@ def search(s,g):
 
         else:
             enqueue(l)
-            Heuristic_value.append(heuristic(l, g))
+            if l in q_queue:
+                Heuristic_value.append(heuristic(l, g))
 
         initial = copy.deepcopy(s)
         r = right(initial)
@@ -179,7 +183,8 @@ def search(s,g):
 
         else:
             enqueue(r)
-            Heuristic_value.append(heuristic(r, g))
+            if r in q_queue:
+                Heuristic_value.append(heuristic(r, g))
 
         s = dequeue()
 
